@@ -59,7 +59,7 @@ const game = (() => {
         return null;
     }
     
-    return {player1, player2, currentPlayer, checkwinner, gameover};
+    return {player1, player2, currentPlayer, checkwinner, gameover, currentTurn};
 })();
 
 const displayController = (() => {
@@ -91,6 +91,7 @@ const displayController = (() => {
                         game.currentPlayer = game.player1;
                     }
                     game.currentTurn++;
+                    console.log(game.currentTurn);
                     if(game.currentTurn === 9) {
                         endgameText.textContent = 'Tie!'
                         game.gameover = true;
