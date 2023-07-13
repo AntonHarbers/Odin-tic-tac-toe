@@ -1,3 +1,13 @@
+const player1NameInput = document.querySelector('#playerOneNameInput');
+const player2NameInput = document.querySelector('#playerTwoNameInput');
+const startButton = document.querySelector('#startBtn');
+const restartButton = document.querySelector('#restartBtn');
+const gameScreen = document.querySelector('#gameScreen');
+const pregameScreen = document.querySelector('#pregameScreen');
+const currentPlayerText = document.querySelector('#currentPlayerText');
+const boardElement = document.getElementById('board');
+const endgameText = document.querySelector('#endgameText');
+
 const gameboard = (() => {
     var board = [
         ['','',''],
@@ -56,7 +66,6 @@ const displayController = (() => {
     const paintBoard = () => {
         // get the current board state
         const board = gameboard.board;
-        const boardElement = document.getElementById('board');
         // paint the board
         for (let i = 0; i < board.length; i++) {
             const row = document.createElement('div');
@@ -83,13 +92,14 @@ const displayController = (() => {
                     }
                     game.currentTurn++;
                     if(game.currentTurn === 9) {
-                        alert('Tie!');
+                        endgameText.textContent = 'Tie!'
                         game.gameover = true;
                     }
+                    currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
                     
                     const winner = game.checkwinner();
                     if (winner !== null) {
-                        alert(`${winner} wins!`);
+                        endgameText.textContent = `${winner} wins!`
                         game.gameover = true
                     }
                 });
@@ -100,4 +110,45 @@ const displayController = (() => {
     return {paintBoard};
 })();
 
-displayController.paintBoard();
+startButton.addEventListener('click', () => {
+    if (player1NameInput.value === '' || player2NameInput.value === '') {
+        alert('Please enter a name for both players');
+        return;
+    }
+    game.player1.name = player1NameInput.value;
+    game.player2.name = player2NameInput.value;
+    displayController.paintBoard();
+    startButton.disabled = true;
+    player1NameInput.disabled = true;
+    player2NameInput.disabled = true;
+
+    gameScreen.classList.add('flex');
+    gameScreen.classList.remove('hidden');
+
+    pregameScreen.classList.add('hidden');
+    pregameScreen.classList.remove('flex');
+    currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
+    
+
+});
+
+restartButton.addEventListener('click', () => {
+    gameboard.board = [
+        ['','',''],
+        ['','',''],
+        ['','','']
+    ];
+    game.currentTurn = 0;
+    game.gameover = false;
+    game.currentPlayer = game.player1;
+    boardElement.innerHTML = '';
+    displayController.paintBoard();
+    currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
+    endgameText.textContent = '';
+
+});
+
+
+
+
+//displayController.paintBoard();
