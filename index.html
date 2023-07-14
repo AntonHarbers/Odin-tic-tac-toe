@@ -8,13 +8,13 @@
     <link rel="icon" href="src/favicon.ico" type="image/x-icon" />
 </head>
 <body>
-    <div id="selectModeScreen">
+    <div id="selectModeScreen" class="flex">
         <button id="selectPlayerModeBtn">Player v Player</button>
         <button id="selectEasyModeBtn">Easy Mode</button>
         <button id="selectMediumModeBtn">Medium Mode</button>
         <button id="selectHardModeBtn">Hard Mode</button>
     </div>
-    <div id="pregameScreen" class="flex">
+    <div id="pregameScreen" class="hidden">
         <h1>Tic Tac Toe</h1>
         <label for="playerOneNameInput">Player 1 Name:</label>
         <input type="text" id="playerOneNameInput">
@@ -23,6 +23,7 @@
         <button id="startBtn">Start Game</button>
     </div>
     <div id="gameScreen" class="hidden">
+        <button id="mainMenuBtn">Back to Menu</button>
         <button id="restartBtn">Restart Game</button>
         <h2 id="currentPlayerText"></h2>
         <div id="board"></div>

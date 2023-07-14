@@ -6,6 +6,44 @@ const gameScreen = document.querySelector('#gameScreen');
 const pregameScreen = document.querySelector('#pregameScreen');
 const currentPlayerText = document.querySelector('#currentPlayerText');
 const boardElement = document.getElementById('board');
+const pvpButton = document.querySelector('#selectPlayerModeBtn');
+const easyButton = document.querySelector('#selectEasyModeBtn');
+const mediumButton = document.querySelector('#selectMediumModeBtn');
+const hardButton = document.querySelector('#selectHardModeBtn');
+const selectModeScreen = document.querySelector('#selectModeScreen');
+const mainMenuButton = document.querySelector('#mainMenuBtn');
+
+mainMenuButton.addEventListener('click', () => {
+    gameScreen.classList.add('hidden');
+    gameScreen.classList.remove('flex');
+    selectModeScreen.classList.add('flex');
+    selectModeScreen.classList.remove('hidden');
+    startButton.disabled = false;
+    player1NameInput.disabled = false;
+    player2NameInput.disabled = false;
+    player1NameInput.value = '';
+    player2NameInput.value = '';
+    game.gameover = false;
+    game.currentTurn = 0;
+    game.currentPlayer = game.player1;
+    gameboard.board = [
+        ['','',''],
+        ['','',''],
+        ['','','']
+    ];
+    while (boardElement.firstChild) {
+        boardElement.removeChild(boardElement.firstChild);
+    }
+});
+
+
+pvpButton.addEventListener('click', () => {
+    selectModeScreen.classList.add('hidden');
+    selectModeScreen.classList.remove('flex');
+    pregameScreen.classList.add('flex');
+    pregameScreen.classList.remove('hidden');
+});
+
 
 const gameboard = (() => {
     var board = [
@@ -60,6 +98,8 @@ const game = (() => {
     
     return {player1, player2, currentPlayer, checkwinner, gameover, currentTurn};
 })();
+
+
 
 const displayController = (() => {
     const paintBoard = () => {
