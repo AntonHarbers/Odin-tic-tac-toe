@@ -6,7 +6,6 @@ const gameScreen = document.querySelector('#gameScreen');
 const pregameScreen = document.querySelector('#pregameScreen');
 const currentPlayerText = document.querySelector('#currentPlayerText');
 const boardElement = document.getElementById('board');
-const endgameText = document.querySelector('#endgameText');
 
 const gameboard = (() => {
     var board = [
@@ -79,7 +78,6 @@ const displayController = (() => {
                 cell.dataset.col = j;
                 cell.addEventListener('click', (e) => {
                     if (e.target.textContent !== '') return;
-                    console.log(game.gameover);
                     if (game.gameover) return;
                     const row = e.target.dataset.row;
                     const col = e.target.dataset.col;
@@ -91,16 +89,17 @@ const displayController = (() => {
                         game.currentPlayer = game.player1;
                     }
                     game.currentTurn++;
-                    console.log(game.currentTurn);
+                    currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
+
                     if(game.currentTurn === 9) {
-                        endgameText.textContent = 'Tie!'
+                        currentPlayerText.textContent = 'Tie!'
                         game.gameover = true;
                     }
-                    currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
                     
                     const winner = game.checkwinner();
+
                     if (winner !== null) {
-                        endgameText.textContent = `${winner} wins!`
+                        currentPlayerText.textContent = `${winner == "X" ? game.player1.name : game.player2.name } wins!`
                         game.gameover = true
                     }
                 });
@@ -129,8 +128,6 @@ startButton.addEventListener('click', () => {
     pregameScreen.classList.add('hidden');
     pregameScreen.classList.remove('flex');
     currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
-    
-
 });
 
 restartButton.addEventListener('click', () => {
@@ -145,11 +142,5 @@ restartButton.addEventListener('click', () => {
     boardElement.innerHTML = '';
     displayController.paintBoard();
     currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
-    endgameText.textContent = '';
-
 });
 
-
-
-
-//displayController.paintBoard();
