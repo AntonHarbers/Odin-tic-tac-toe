@@ -1,64 +1,26 @@
-const player1NameInput = document.querySelector('#playerOneNameInput');
-const player2NameInput = document.querySelector('#playerTwoNameInput');
-const startButton = document.querySelector('#startBtn');
-const restartButton = document.querySelector('#restartBtn');
-const gameScreen = document.querySelector('#gameScreen');
-const pregameScreen = document.querySelector('#pregameScreen');
-const currentPlayerText = document.querySelector('#currentPlayerText');
-const boardElement = document.getElementById('board');
-const pvpButton = document.querySelector('#selectPlayerModeBtn');
-const easyButton = document.querySelector('#selectEasyModeBtn');
-const mediumButton = document.querySelector('#selectMediumModeBtn');
-const hardButton = document.querySelector('#selectHardModeBtn');
-const selectModeScreen = document.querySelector('#selectModeScreen');
-const mainMenuButton = document.querySelector('#mainMenuBtn');
-
-mainMenuButton.addEventListener('click', () => {
-    gameScreen.classList.add('hidden');
-    gameScreen.classList.remove('flex');
-    selectModeScreen.classList.add('flex');
-    selectModeScreen.classList.remove('hidden');
-    startButton.disabled = false;
-    player1NameInput.disabled = false;
-    player2NameInput.disabled = false;
-    player1NameInput.value = '';
-    player2NameInput.value = '';
-    game.gameover = false;
-    game.currentTurn = 0;
-    game.currentPlayer = game.player1;
-    gameboard.board = [
-        ['','',''],
-        ['','',''],
-        ['','','']
-    ];
-    while (boardElement.firstChild) {
-        boardElement.removeChild(boardElement.firstChild);
-    }
-});
-
-
-pvpButton.addEventListener('click', () => {
-    selectModeScreen.classList.add('hidden');
-    selectModeScreen.classList.remove('flex');
-    pregameScreen.classList.add('flex');
-    pregameScreen.classList.remove('hidden');
-});
-
-
-const gameboard = (() => {
-    var board = [
-        ['','',''],
-        ['','',''],
-        ['','','']
-    ];
-    return {board};
-})();
+import {boardElement} from './var.js'
 
 const player = (name, marker) => {
     return {name, marker};
 }
 
-const game = (() => {
+export const gameboard = (() => {
+    var board = [
+        ['','',''],
+        ['','',''],
+        ['','','']
+    ];
+    const resetBoard = () => {
+        gameboard.board = [
+            ['','',''],
+            ['','',''],
+            ['','','']
+        ];
+    }
+    return {board, resetBoard};
+})();
+
+export const game = (() => {
     const player1 = player('Player 1', 'X');
     const player2 = player('Player 2', 'O');
     var gameover = false;
@@ -99,9 +61,7 @@ const game = (() => {
     return {player1, player2, currentPlayer, checkwinner, gameover, currentTurn};
 })();
 
-
-
-const displayController = (() => {
+export const displayController = (() => {
     const paintBoard = () => {
         // get the current board state
         const board = gameboard.board;
@@ -149,38 +109,4 @@ const displayController = (() => {
     }
     return {paintBoard};
 })();
-
-startButton.addEventListener('click', () => {
-    if (player1NameInput.value === '' || player2NameInput.value === '') {
-        alert('Please enter a name for both players');
-        return;
-    }
-    game.player1.name = player1NameInput.value;
-    game.player2.name = player2NameInput.value;
-    displayController.paintBoard();
-    startButton.disabled = true;
-    player1NameInput.disabled = true;
-    player2NameInput.disabled = true;
-
-    gameScreen.classList.add('flex');
-    gameScreen.classList.remove('hidden');
-
-    pregameScreen.classList.add('hidden');
-    pregameScreen.classList.remove('flex');
-    currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
-});
-
-restartButton.addEventListener('click', () => {
-    gameboard.board = [
-        ['','',''],
-        ['','',''],
-        ['','','']
-    ];
-    game.currentTurn = 0;
-    game.gameover = false;
-    game.currentPlayer = game.player1;
-    boardElement.innerHTML = '';
-    displayController.paintBoard();
-    currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
-});
 
