@@ -12,5 +12,4 @@ export const mediumButton = document.querySelector('#selectMediumModeBtn');
 export const hardButton = document.querySelector('#selectHardModeBtn');
 export const selectModeScreen = document.querySelector('#selectModeScreen');
 export const mainMenuButton = document.querySelector('#mainMenuBtn');
-
-
+export const aiPregameScreen = document.querySelector('#aiPregameScreen');

@@ -77,6 +77,7 @@ export const displayController = (() => {
                 cell.dataset.row = i;
                 cell.dataset.col = j;
                 cell.addEventListener('click', (e) => {
+                    // add logic for AI
                     if (e.target.textContent !== '') return;
                     if (game.gameover) return;
                     const row = e.target.dataset.row;

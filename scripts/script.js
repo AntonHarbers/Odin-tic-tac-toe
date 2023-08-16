@@ -14,10 +14,41 @@ import {
     mediumButton, 
     hardButton, 
     selectModeScreen, 
-    mainMenuButton 
+    mainMenuButton,
+    aiPregameScreen,
 } from '/scripts/var.js'
 
+let difficulty = 'easy';
+
 mainMenuButton.addEventListener('click', () => {
+    returnToMainMenu();
+});
+
+pvpButton.addEventListener('click', () => {
+    startPvpMode();
+});
+
+startButton.addEventListener('click', () => {
+    startGame();
+});
+
+restartButton.addEventListener('click', () => {
+    restartGame();
+});
+
+easyButton.addEventListener('click', () => {
+    startAiMode('easy');
+});
+
+mediumButton.addEventListener('click', () => {
+    startAiMode('medium');
+});
+
+hardButton.addEventListener('click', () => {
+    startAiMode('hard');
+});
+
+const returnToMainMenu = () => {
     gameScreen.classList.add('hidden');
     gameScreen.classList.remove('flex');
     selectModeScreen.classList.add('flex');
@@ -38,16 +69,35 @@ mainMenuButton.addEventListener('click', () => {
     while (boardElement.firstChild) {
         boardElement.removeChild(boardElement.firstChild);
     }
-});
+}
 
-pvpButton.addEventListener('click', () => {
+const restartGame = () => {
+    gameboard.resetBoard();
+    game.currentTurn = 0;
+    game.gameover = false;
+    game.currentPlayer = game.player1;
+    boardElement.innerHTML = '';
+    displayController.paintBoard();
+    currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
+}
+
+const startPvpMode = () => {
     selectModeScreen.classList.add('hidden');
     selectModeScreen.classList.remove('flex');
     pregameScreen.classList.add('flex');
     pregameScreen.classList.remove('hidden');
-});
+}
 
-startButton.addEventListener('click', () => {
+const startAiMode = (aiDifficulty) => {
+    //do the same thing as start pvp mode, only take one player name, set up easy AI
+    selectModeScreen.classList.add('hidden');
+    selectModeScreen.classList.remove('flex');
+    aiPregameScreen.classList.add('flex');
+    aiPregameScreen.classList.remove('hidden');
+    difficulty = aiDifficulty;
+}
+
+const startGame = () => {
     if (player1NameInput.value === '' || player2NameInput.value === '') {
         alert('Please enter a name for both players');
         return;
@@ -65,14 +115,4 @@ startButton.addEventListener('click', () => {
     pregameScreen.classList.add('hidden');
     pregameScreen.classList.remove('flex');
     currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
-});
-
-restartButton.addEventListener('click', () => {
-    gameboard.resetBoard();
-    game.currentTurn = 0;
-    game.gameover = false;
-    game.currentPlayer = game.player1;
-    boardElement.innerHTML = '';
-    displayController.paintBoard();
-    currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
-});
+}
