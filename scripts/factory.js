@@ -91,12 +91,6 @@ export const game = (() => {
     } else if (game.difficulty === 'Hard') {
       makeBestMove();
     }
-
-    //log the current time in milliseconds
-    const end = new Date().getTime();
-    //call the loop function
-    console.log('end');
-    console.log(end);
   };
 
   const makeRandomMove = () => {
@@ -217,15 +211,10 @@ export const displayController = (() => {
             game.gameover = true;
           } else {
             if (game.difficulty != '') {
-              //log the current time in milliseconds
-              const start = new Date().getTime();
-              //call the loop function
-              console.log('start');
-              console.log(start);
 
               setTimeout(() => {
                 game.makeComputerMove();
-              }, 0);
+              }, 1000);
             }
           }
         });
