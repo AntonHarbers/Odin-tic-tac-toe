@@ -1,25 +1,27 @@
-import {game, gameboard, displayController} from './scripts/factory.js'
+import {game, gameboard, displayController} from './factory.js'
 
 import { 
     player1NameInput, 
     playerOneNameInputComputer,
     player2NameInput, 
-    startButton, 
+    startButton,
     startComputerGameButton,
-    restartButton, 
-    gameScreen, 
+    restartButton,
+    gameScreen,
     pregameScreen, 
     pregameScreenComputer,
-    currentPlayerText, 
-    boardElement, 
-    pvpButton, 
+    currentPlayerText,
+    boardElement,
+    pvpButton,
     easyButton, 
     mediumButton, 
     hardButton, 
     selectModeScreen, 
     mainMenuButton,
     difficultyText,
-} from './scripts/var.js'
+} from './var.js'
+
+import '../styles/style.css';
 
 let difficulty = 'easy';
 
