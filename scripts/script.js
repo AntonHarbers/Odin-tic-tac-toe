@@ -2,11 +2,14 @@ import {game, gameboard, displayController} from '/scripts/factory.js'
 
 import { 
     player1NameInput, 
+    playerOneNameInputComputer,
     player2NameInput, 
     startButton, 
+    startComputerGameButton,
     restartButton, 
     gameScreen, 
     pregameScreen, 
+    pregameScreenComputer,
     currentPlayerText, 
     boardElement, 
     pvpButton, 
@@ -14,7 +17,8 @@ import {
     mediumButton, 
     hardButton, 
     selectModeScreen, 
-    mainMenuButton 
+    mainMenuButton,
+    difficultyText,
 } from '/scripts/var.js'
 
 mainMenuButton.addEventListener('click', () => {
@@ -47,6 +51,18 @@ pvpButton.addEventListener('click', () => {
     pregameScreen.classList.remove('hidden');
 });
 
+easyButton.addEventListener('click', () => {
+    enterComputerPregame('Easy');
+})
+
+mediumButton.addEventListener('click', () => {
+    enterComputerPregame('Medium');
+})
+
+hardButton.addEventListener('click', () => {
+    enterComputerPregame('Hard');
+})
+
 startButton.addEventListener('click', () => {
     if (player1NameInput.value === '' || player2NameInput.value === '') {
         alert('Please enter a name for both players');
@@ -67,12 +83,60 @@ startButton.addEventListener('click', () => {
     currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
 });
 
+startComputerGameButton.addEventListener('click', () => {
+    if (playerOneNameInputComputer.value === '') {
+        alert('Please enter a name for the player');
+        return;
+    }
+
+    const random = Math.floor(Math.random() * 2);
+    game.currentPlayer = random === 0 ? game.player1 : game.player2;
+
+
+    game.player1.name = playerOneNameInputComputer.value;
+    game.player2.name = 'Computer';
+    displayController.paintBoard();
+    startButton.disabled = true;
+    player1NameInput.disabled = true;
+    player2NameInput.disabled = true;
+
+    gameScreen.classList.add('flex');
+    gameScreen.classList.remove('hidden');
+
+    pregameScreenComputer.classList.add('hidden');
+    pregameScreenComputer.classList.remove('flex');
+    currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
+
+    if (game.currentPlayer === game.player2) {
+        setTimeout(() => {
+            game.makeComputerMove();
+        }, 1000);    }
+});
+
+
 restartButton.addEventListener('click', () => {
     gameboard.resetBoard();
     game.currentTurn = 0;
     game.gameover = false;
-    game.currentPlayer = game.player1;
+    const random = Math.floor(Math.random() * 2);
+
+    game.currentPlayer = random === 0 ? game.player1 : game.player2;
     boardElement.innerHTML = '';
     displayController.paintBoard();
     currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
+
+    if (game.currentPlayer === game.player2 && game.difficulty !== '') {
+        setTimeout(() => {
+            game.makeComputerMove();
+        }, 1000);    }
 });
+
+const enterComputerPregame = (difficulty) => {
+    game.difficulty = difficulty;
+    difficultyText.textContent = ` ${difficulty} Computer`;
+    selectModeScreen.classList.add('hidden');
+    selectModeScreen.classList.remove('flex');
+    pregameScreenComputer.classList.add('flex');
+    pregameScreenComputer.classList.remove('hidden');
+}
+

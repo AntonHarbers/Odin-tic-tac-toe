@@ -7,8 +7,8 @@
     --primary: #1a1a1a;
     --secondary: #e6e6e6;
     --accent: #ff4d4d;
-    --accent2: #ff9999;
-    --accent3: #ffcccc;
+    --accent2: #3691db;
+    --accent3: #06b387;
 }
 
 #gameScreen{
@@ -83,6 +83,7 @@ button{
     border-radius: 10px;
     text-align: center;
     background-color: var(--accent2);
+    cursor: pointer;
 }
 
 button:hover{
