@@ -1,4 +1,4 @@
-import {game, gameboard, displayController} from '/scripts/factory.js'
+import {game, gameboard, displayController} from './scripts/factory.js'
 
 import { 
     player1NameInput, 
@@ -19,7 +19,7 @@ import {
     selectModeScreen, 
     mainMenuButton,
     difficultyText,
-} from '/scripts/var.js'
+} from './scripts/var.js'
 
 let difficulty = 'easy';
 
