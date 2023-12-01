@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Odin Project - Tic Tac Toe</title>
     <link rel="icon" href="src/favicon.ico" type="image/x-icon" />
     <script defer src="main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1 id="pageHeader">Tic Tac Toe</h1>
 
-</head>
-<body>
     <div id="selectModeScreen" class="flex">
-        <button id="selectPlayerModeBtn">Player v Player</button>
-        <button id="selectEasyModeBtn">Easy Mode</button>
-        <button id="selectMediumModeBtn">Medium Mode</button>
-        <button id="selectHardModeBtn">Hard Mode</button>
+      <button id="selectPlayerModeBtn">Player v Player</button>
+      <button id="selectEasyModeBtn">Easy Mode</button>
+      <button id="selectMediumModeBtn">Medium Mode</button>
+      <button id="selectHardModeBtn">Hard Mode</button>
     </div>
     <div id="pregameScreen" class="hidden">
-        <h1>Tic Tac Toe</h1>
-        <label for="playerOneNameInput">Player 1 Name:</label>
-        <input type="text" id="playerOneNameInput">
-        <label for="playerTwoNameInput">Player 2 Name:</label>
-        <input type="text" id="playerTwoNameInput">
-        <button id="startBtn">Start Game</button>
+      <label for="playerOneNameInput">Player 1 Name:</label>
+      <input type="text" id="playerOneNameInput" />
+      <label for="playerTwoNameInput">Player 2 Name:</label>
+      <input type="text" id="playerTwoNameInput" />
+      <button id="startBtn">Start Game</button>
     </div>
     <div id="pregameScreenComputer" class="hidden">
-        <h1>Tic Tac Toe vs <span id="difficultyText"></span></h1>
-        <label for="playerOneNameInput">Player 1 Name:</label>
-        <input type="text" id="playerOneNameInputComputer">
-        <button id="startComputerGameBtn">Start Game</button>
+      <h1><span id="difficultyText"></span></h1>
+      <label for="playerOneNameInput">Player 1 Name:</label>
+      <input type="text" id="playerOneNameInputComputer" />
+      <button id="startComputerGameBtn">Start Game</button>
     </div>
     <div id="gameScreen" class="hidden">
-        <button id="mainMenuBtn">Back to Menu</button>
-        <button id="restartBtn">Restart Game</button>
-        <h2 id="currentPlayerText"></h2>
-        <div id="board"></div>
-        <h2 id="endgameText"></h2>
+      <button id="mainMenuBtn">Back to Menu</button>
+      <button id="restartBtn">Restart Game</button>
+      <h2 id="currentPlayerText"></h2>
+      <div id="board"></div>
+      <h2 id="endgameText"></h2>
     </div>
-</body>
+  </body>
 </html>

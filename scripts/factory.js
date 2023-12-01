@@ -103,7 +103,14 @@ export const game = (() => {
       const cell = document.querySelector(
         `[data-row="${randomRow}"][data-col="${randomCol}"]`
       );
-      cell.textContent = game.currentPlayer.marker;
+      if (game.currentPlayer.marker === 'X') {
+        cell.classList.add('x');
+        cell.classList.remove('o');
+      } else {
+        cell.classList.add('o');
+        cell.classList.remove('x');
+      }
+
       game.currentTurn++;
       game.currentPlayer = game.player1;
       currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
@@ -132,7 +139,13 @@ export const game = (() => {
     const cell = document.querySelector(
       `[data-row="${bestMove.row}"][data-col="${bestMove.col}"]`
     );
-    cell.textContent = game.currentPlayer.marker;
+    if (game.currentPlayer.marker === 'X') {
+      cell.classList.add('x');
+      cell.classList.remove('o');
+    } else {
+      cell.classList.add('o');
+      cell.classList.remove('x');
+    }
     game.currentTurn++;
     game.currentPlayer = game.player1;
     currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
@@ -185,7 +198,14 @@ export const displayController = (() => {
           const row = e.target.dataset.row;
           const col = e.target.dataset.col;
           gameboard.board[row][col] = game.currentPlayer.marker;
-          e.target.textContent = game.currentPlayer.marker;
+          if (game.currentPlayer.marker === 'X') {
+            e.target.classList.add('x');
+            e.target.classList.remove('o');
+          } else {
+            e.target.classList.add('o');
+            e.target.classList.remove('x');
+          }
+
           if (game.currentPlayer === game.player1) {
             game.currentPlayer = game.player2;
           } else {
@@ -211,7 +231,6 @@ export const displayController = (() => {
             game.gameover = true;
           } else {
             if (game.difficulty != '') {
-
               setTimeout(() => {
                 game.makeComputerMove();
               }, 1000);
