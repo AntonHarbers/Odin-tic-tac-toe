@@ -6,8 +6,6 @@ A single and multiplayer tic tac toe game written in javascript, html and css fo
 
 ```
     Todos:
-    Images for X, O, Gridcells etc.
-
     Sound FX
     Add delay to computer move
 

@@ -1,4 +1,4 @@
-import { boardElement } from './var.js';
+import { boardElement, endGameButtons } from './var.js';
 
 const player = (name, marker) => {
   return { name, marker };
@@ -119,12 +119,14 @@ export const game = (() => {
 
       if (winner === 'tie') {
         currentPlayerText.textContent = 'Tie!';
+        endGameButtons.classList.remove('hidden');
         game.gameover = true;
       } else if (winner !== null && winner !== 'tie') {
         currentPlayerText.textContent = `${
           winner == 'X' ? game.player1.name : game.player2.name
         } wins!`;
         game.gameover = true;
+        endGameButtons.classList.remove('hidden');
       }
     } else {
       makeComputerMove();
@@ -155,11 +157,13 @@ export const game = (() => {
     if (winner === 'tie') {
       currentPlayerText.textContent = 'Tie!';
       game.gameover = true;
+      endGameButtons.classList.remove('hidden');
     } else if (winner !== null && winner !== 'tie') {
       currentPlayerText.textContent = `${
         winner == 'X' ? game.player1.name : game.player2.name
       } wins!`;
       game.gameover = true;
+      endGameButtons.classList.remove('hidden');
     }
   };
 
@@ -216,6 +220,7 @@ export const displayController = (() => {
 
           if (game.currentTurn === 9) {
             currentPlayerText.textContent = 'Tie!';
+            endGameButtons.classList.remove('hidden');
             game.gameover = true;
           }
 
@@ -225,9 +230,11 @@ export const displayController = (() => {
             currentPlayerText.textContent = `${
               winner == 'X' ? game.player1.name : game.player2.name
             } wins!`;
+            endGameButtons.classList.remove('hidden');
             game.gameover = true;
           } else if (winner === 'tie') {
             currentPlayerText.textContent = 'Tie!';
+            endGameButtons.classList.remove('hidden');
             game.gameover = true;
           } else {
             if (game.difficulty != '') {

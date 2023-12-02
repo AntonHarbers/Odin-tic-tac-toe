@@ -19,6 +19,7 @@ import {
   selectModeScreen,
   mainMenuButton,
   difficultyText,
+  endGameButtons,
 } from './var.js';
 
 import '../styles/style.css';
@@ -91,18 +92,22 @@ const startPvpMode = () => {
   selectModeScreen.classList.remove('flex');
   pregameScreen.classList.add('flex');
   pregameScreen.classList.remove('hidden');
+  endGameButtons.classList.add('hidden');
 };
 
 easyButton.addEventListener('click', () => {
   enterComputerPregame('Easy');
+  endGameButtons.classList.add('hidden');
 });
 
 mediumButton.addEventListener('click', () => {
   enterComputerPregame('Medium');
+  endGameButtons.classList.add('hidden');
 });
 
 hardButton.addEventListener('click', () => {
   enterComputerPregame('Hard');
+  endGameButtons.classList.add('hidden');
 });
 
 startButton.addEventListener('click', () => {
@@ -110,6 +115,7 @@ startButton.addEventListener('click', () => {
     alert('Please enter a name for both players');
     return;
   }
+  endGameButtons.classList.add('hidden');
   game.player1.name = player1NameInput.value;
   game.player2.name = player2NameInput.value;
   displayController.paintBoard();
@@ -157,6 +163,7 @@ startComputerGameButton.addEventListener('click', () => {
 
 restartButton.addEventListener('click', () => {
   gameboard.resetBoard();
+  endGameButtons.classList.add('hidden');
   game.currentTurn = 0;
   game.gameover = false;
   const random = Math.floor(Math.random() * 2);
@@ -175,7 +182,8 @@ restartButton.addEventListener('click', () => {
 
 const enterComputerPregame = (difficulty) => {
   game.difficulty = difficulty;
-  difficultyText.textContent = ` ${difficulty} Computer`;
+  endGameButtons.classList.add('hidden');
+  difficultyText.textContent = ` ${difficulty} Mode`;
   selectModeScreen.classList.add('hidden');
   selectModeScreen.classList.remove('flex');
   pregameScreenComputer.classList.add('flex');
