@@ -24,34 +24,52 @@ import {
 
 import '../styles/style.css';
 
+function playMusic() {
+  var backgroundAudio = document.getElementById('backgroundMusic');
+  backgroundAudio.volume = 0.1;
+  backgroundAudio.play();
+}
+
+const buttonPressAudio = document.querySelector('#buttonPressAudio');
+buttonPressAudio.volume = 0.2;
+
 let difficulty = 'easy';
+
+document.addEventListener('click', playMusic, { once: true });
 
 mainMenuButton.addEventListener('click', () => {
   returnToMainMenu();
+  buttonPressAudio.play();
 });
 
 pvpButton.addEventListener('click', () => {
   startPvpMode();
+  buttonPressAudio.play();
 });
 
 startButton.addEventListener('click', () => {
   startGame();
+  buttonPressAudio.play();
 });
 
 restartButton.addEventListener('click', () => {
   restartGame();
+  buttonPressAudio.play();
 });
 
 easyButton.addEventListener('click', () => {
   game.difficulty = 'easy';
+  buttonPressAudio.play();
 });
 
 mediumButton.addEventListener('click', () => {
   game.difficulty = 'medium';
+  buttonPressAudio.play();
 });
 
 hardButton.addEventListener('click', () => {
   game.difficulty = 'hard';
+  buttonPressAudio.play();
 });
 
 const returnToMainMenu = () => {
@@ -98,19 +116,23 @@ const startPvpMode = () => {
 easyButton.addEventListener('click', () => {
   enterComputerPregame('Easy');
   endGameButtons.classList.add('hidden');
+  buttonPressAudio.play();
 });
 
 mediumButton.addEventListener('click', () => {
   enterComputerPregame('Medium');
   endGameButtons.classList.add('hidden');
+  buttonPressAudio.play();
 });
 
 hardButton.addEventListener('click', () => {
   enterComputerPregame('Hard');
   endGameButtons.classList.add('hidden');
+  buttonPressAudio.play();
 });
 
 startButton.addEventListener('click', () => {
+  buttonPressAudio.play();
   if (player1NameInput.value === '' || player2NameInput.value === '') {
     alert('Please enter a name for both players');
     return;
@@ -162,6 +184,7 @@ startComputerGameButton.addEventListener('click', () => {
 });
 
 restartButton.addEventListener('click', () => {
+  buttonPressAudio.play();
   gameboard.resetBoard();
   endGameButtons.classList.add('hidden');
   game.currentTurn = 0;

@@ -79,6 +79,9 @@ export const game = (() => {
     return null;
   };
   const makeComputerMove = () => {
+    const kickAudio = document.querySelector('#kickAudio');
+    kickAudio.volume = 0.5;
+    kickAudio.play();
     if (game.difficulty === 'Easy') {
       makeRandomMove();
     } else if (game.difficulty === 'Medium') {
@@ -196,12 +199,16 @@ export const displayController = (() => {
         cell.dataset.col = j;
         cell.addEventListener('click', (e) => {
           if (e.target.textContent !== '') return;
+
           if (game.difficulty != '' && game.currentPlayer === game.player2)
             return;
           if (game.gameover) return;
           const row = e.target.dataset.row;
           const col = e.target.dataset.col;
           gameboard.board[row][col] = game.currentPlayer.marker;
+          const kickAudio = document.querySelector('#kickAudio');
+          kickAudio.volume = 0.5;
+          kickAudio.play();
           if (game.currentPlayer.marker === 'X') {
             e.target.classList.add('x');
             e.target.classList.remove('o');

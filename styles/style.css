@@ -185,3 +185,25 @@ button:active {
     opacity: 1;
   }
 }
+
+@media (max-width: 1000px) {
+  #pageHeader {
+    font-size: 5rem;
+  }
+
+  button {
+    width: 90%;
+  }
+
+  input {
+    width: 82%;
+  }
+
+  .endGameButtons {
+    width: 90%;
+    font-size: 1rem;
+    height: auto;
+    padding: 0.5rem;
+    margin: 0;
+  }
+}
