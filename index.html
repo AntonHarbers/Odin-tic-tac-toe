@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Odin Project - Tic Tac Toe</title>
-    <link rel="icon" href="src/favicon.ico" type="image/x-icon" />
+    <title>Tic Tac Toe</title>
     <script defer src="main.js"></script>
+    <!-- FAVICON -->
+    <link rel="icon" href="src/favicon.ico" type="image/x-icon" />
+    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,17 +16,23 @@
     />
   </head>
   <body>
-    <audio id="backgroundMusic" src="background.mp3" loop></audio>
-    <audio id="buttonPressAudio" src="button.wav"></audio>
-    <audio src="kick.wav" id="kickAudio"></audio>
+    <!-- AUDIO SOURCES -->
+    <audio id="backgroundMusic" src="audio/background.mp3" loop></audio>
+    <audio id="buttonPressAudio" src="audio/button.wav"></audio>
+    <audio id="kickAudio" src="audio/kick.wav"></audio>
+
+    <!-- HEADER -->
     <h1 id="pageHeader">Tic Tac Toe</h1>
 
+    <!-- MAIN MENU -->
     <div id="selectModeScreen" class="flex">
       <button id="selectPlayerModeBtn">Player v Player</button>
       <button id="selectEasyModeBtn">Easy Mode</button>
       <button id="selectMediumModeBtn">Medium Mode</button>
       <button id="selectHardModeBtn">Hard Mode</button>
     </div>
+
+    <!-- PRE GAME SCREEN -->
     <div id="pregameScreen" class="hidden">
       <input
         type="text"
@@ -38,6 +46,8 @@
       />
       <button id="startBtn">Start Game</button>
     </div>
+
+    <!-- PRE GAME SCREEN COMPUTER -->
     <div id="pregameScreenComputer" class="hidden">
       <h1><span id="difficultyText"></span></h1>
       <input
@@ -47,6 +57,8 @@
       />
       <button id="startComputerGameBtn">Start Game</button>
     </div>
+
+    <!-- GAME SCREEN -->
     <div id="gameScreen" class="hidden">
       <div id="board"></div>
       <h2 id="currentPlayerText"></h2>
