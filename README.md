@@ -2,7 +2,7 @@
 
 A single and multiplayer tic tac toe game written in javascript, html and css for the Odin Project. Bundled using webpack.
 
-[Live Link](https://antonharbers.github.io/Odin-tic-tac-toe/)
+[Live Link](https://antonharbers.github.io/Tic-Tac-Toe/)
 
 ![Screenshot of Game](/public/repoImage.png)
 
