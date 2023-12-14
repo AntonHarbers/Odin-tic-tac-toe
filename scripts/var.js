@@ -23,3 +23,5 @@ export const startComputerGameButton = document.querySelector(
   '#startComputerGameBtn'
 );
 export const endGameButtons = document.querySelector('.endGameButtons');
+export const buttonPressAudio = document.querySelector('#buttonPressAudio');
+export const backgroundAudio = document.getElementById('backgroundMusic');

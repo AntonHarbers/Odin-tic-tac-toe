@@ -20,57 +20,78 @@ import {
   mainMenuButton,
   difficultyText,
   endGameButtons,
+  buttonPressAudio,
+  backgroundAudio,
 } from './var.js';
 
 import '../styles/style.css';
 
-function playMusic() {
-  var backgroundAudio = document.getElementById('backgroundMusic');
-  backgroundAudio.volume = 0.1;
-  backgroundAudio.play();
-}
+// EVENT LISTENERS
 
-const buttonPressAudio = document.querySelector('#buttonPressAudio');
-buttonPressAudio.volume = 0.2;
-
-let difficulty = 'easy';
-
-document.addEventListener('click', playMusic, { once: true });
+document.addEventListener('click', startMusicPlayback, { once: true });
 
 mainMenuButton.addEventListener('click', () => {
-  returnToMainMenu();
   buttonPressAudio.play();
+  returnToMainMenu();
 });
 
 pvpButton.addEventListener('click', () => {
-  startPvpMode();
   buttonPressAudio.play();
+  startPvpMode();
 });
 
 startButton.addEventListener('click', () => {
-  startGame();
   buttonPressAudio.play();
+  startPVPGame();
 });
 
 restartButton.addEventListener('click', () => {
-  restartGame();
   buttonPressAudio.play();
+  restartGame();
 });
 
 easyButton.addEventListener('click', () => {
-  game.difficulty = 'easy';
   buttonPressAudio.play();
+  enterComputerPregame('Easy');
+  endGameButtons.classList.add('hidden');
 });
 
 mediumButton.addEventListener('click', () => {
-  game.difficulty = 'medium';
   buttonPressAudio.play();
+  enterComputerPregame('Medium');
+  endGameButtons.classList.add('hidden');
 });
 
 hardButton.addEventListener('click', () => {
-  game.difficulty = 'hard';
   buttonPressAudio.play();
+  enterComputerPregame('Hard');
+  endGameButtons.classList.add('hidden');
 });
+
+startComputerGameButton.addEventListener('click', () => {
+  buttonPressAudio.play();
+  startGameAgainstComputer();
+});
+
+// HELPER FUNCTIONS
+
+const startPvpMode = () => {
+  selectModeScreen.classList.add('hidden');
+  selectModeScreen.classList.remove('flex');
+  pregameScreen.classList.add('flex');
+  pregameScreen.classList.remove('hidden');
+  endGameButtons.classList.add('hidden');
+};
+
+const enterComputerPregame = (difficulty) => {
+  game.difficulty = difficulty;
+  endGameButtons.classList.add('hidden');
+  difficultyText.textContent = ` ${difficulty} Mode`;
+  selectModeScreen.classList.add('hidden');
+  selectModeScreen.classList.remove('flex');
+  pregameScreenComputer.classList.add('flex');
+  pregameScreenComputer.classList.remove('hidden');
+};
 
 const returnToMainMenu = () => {
   gameScreen.classList.add('hidden');
@@ -97,63 +118,42 @@ const returnToMainMenu = () => {
 
 const restartGame = () => {
   gameboard.resetBoard();
+  endGameButtons.classList.add('hidden');
   game.currentTurn = 0;
   game.gameover = false;
-  game.currentPlayer = game.player1;
+  const random = Math.floor(Math.random() * 2);
+  game.currentPlayer = random === 0 ? game.player1 : game.player2;
   boardElement.innerHTML = '';
   displayController.paintBoard();
   currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
+
+  if (game.currentPlayer === game.player2 && game.difficulty !== '') {
+    setTimeout(() => {
+      game.makeComputerMove();
+    }, 1000);
+  }
 };
 
-const startPvpMode = () => {
-  selectModeScreen.classList.add('hidden');
-  selectModeScreen.classList.remove('flex');
-  pregameScreen.classList.add('flex');
-  pregameScreen.classList.remove('hidden');
-  endGameButtons.classList.add('hidden');
-};
-
-easyButton.addEventListener('click', () => {
-  enterComputerPregame('Easy');
-  endGameButtons.classList.add('hidden');
-  buttonPressAudio.play();
-});
-
-mediumButton.addEventListener('click', () => {
-  enterComputerPregame('Medium');
-  endGameButtons.classList.add('hidden');
-  buttonPressAudio.play();
-});
-
-hardButton.addEventListener('click', () => {
-  enterComputerPregame('Hard');
-  endGameButtons.classList.add('hidden');
-  buttonPressAudio.play();
-});
-
-startButton.addEventListener('click', () => {
-  buttonPressAudio.play();
+function startPVPGame() {
   if (player1NameInput.value === '' || player2NameInput.value === '') {
     alert('Please enter a name for both players');
     return;
   }
+  startButton.disabled = true;
+  player1NameInput.disabled = true;
+  player2NameInput.disabled = true;
+  gameScreen.classList.add('flex');
+  gameScreen.classList.remove('hidden');
+  pregameScreen.classList.add('hidden');
+  pregameScreen.classList.remove('flex');
   endGameButtons.classList.add('hidden');
   game.player1.name = player1NameInput.value;
   game.player2.name = player2NameInput.value;
   displayController.paintBoard();
-  startButton.disabled = true;
-  player1NameInput.disabled = true;
-  player2NameInput.disabled = true;
-
-  gameScreen.classList.add('flex');
-  gameScreen.classList.remove('hidden');
-
-  pregameScreen.classList.add('hidden');
-  pregameScreen.classList.remove('flex');
   currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
-});
+}
 
-startComputerGameButton.addEventListener('click', () => {
+function startGameAgainstComputer() {
   if (playerOneNameInputComputer.value === '') {
     alert('Please enter a name for the player');
     return;
@@ -181,34 +181,10 @@ startComputerGameButton.addEventListener('click', () => {
       game.makeComputerMove();
     }, 1000);
   }
-});
+}
 
-restartButton.addEventListener('click', () => {
-  buttonPressAudio.play();
-  gameboard.resetBoard();
-  endGameButtons.classList.add('hidden');
-  game.currentTurn = 0;
-  game.gameover = false;
-  const random = Math.floor(Math.random() * 2);
-
-  game.currentPlayer = random === 0 ? game.player1 : game.player2;
-  boardElement.innerHTML = '';
-  displayController.paintBoard();
-  currentPlayerText.textContent = `${game.currentPlayer.name}'s turn`;
-
-  if (game.currentPlayer === game.player2 && game.difficulty !== '') {
-    setTimeout(() => {
-      game.makeComputerMove();
-    }, 1000);
-  }
-});
-
-const enterComputerPregame = (difficulty) => {
-  game.difficulty = difficulty;
-  endGameButtons.classList.add('hidden');
-  difficultyText.textContent = ` ${difficulty} Mode`;
-  selectModeScreen.classList.add('hidden');
-  selectModeScreen.classList.remove('flex');
-  pregameScreenComputer.classList.add('flex');
-  pregameScreenComputer.classList.remove('hidden');
-};
+function startMusicPlayback() {
+  backgroundAudio.volume = 0.1;
+  buttonPressAudio.volume = 0.2;
+  backgroundAudio.play();
+}

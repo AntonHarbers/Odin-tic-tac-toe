@@ -27,6 +27,7 @@ export const game = (() => {
   var currentPlayer = player1;
   var currentTurn = 0;
   var difficulty = '';
+
   const checkwinner = () => {
     const board = gameboard.board;
 
@@ -78,6 +79,7 @@ export const game = (() => {
 
     return null;
   };
+
   const makeComputerMove = () => {
     const kickAudio = document.querySelector('#kickAudio');
     kickAudio.volume = 0.5;
